@@ -1,13 +1,15 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
 
+
 const app = express();
 
-
-const port = process.env.PORT || 4000
+const port = process.env.PORT
+const password = process.env.PASSWORD
 
 //Middleware
 app.use(cors());
@@ -16,8 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static('/public'))
 
-//Connection to db
-mongoose.connect("mongodb://localhost/plants", {
+//Connection to db with mongoose
+mongoose.connect(`mongodb+srv://LauraTrehout:${password}@clusterlt.wtqhp.mongodb.net/plants?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
